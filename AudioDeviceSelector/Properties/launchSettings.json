@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "AudioDeviceSelector (Package)": {
+      "commandName": "MsixPackage",
+      "doNotLaunchApp": true
+    },
+    "AudioDeviceSelector (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
