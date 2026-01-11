@@ -13,9 +13,9 @@ A Command Palette extension for Windows that allows you to quickly switch betwee
 
 ## Requirements
 
-- **Windows 10/11** (Windows 10 Build 19041 or later recommended)
+- **Windows 10/11**
 - **.NET 9** or later
-- [Command Palette]https://learn.microsoft.com/en-us/windows/powertoys/command-palette/overview)
+- [Command Palette](https://learn.microsoft.com/en-us/windows/powertoys/command-palette/overview)
 
 ## Installation
 
@@ -45,19 +45,18 @@ Once installed, you can use the extension through your Command Palette host:
 
 ```
 AudioDeviceSelector/
- Commands/        # Command implementations
- Pages/            # UI pages
- Services/              # Core service logic (AudioDeviceService)
- Interop/       # Windows Audio API interop definitions
-    IPolicyConfig.cs   # Core audio policy interface
-    ERole.cs   # Audio endpoint role definitions
-    EndpointFormFactor.cs  # Device type definitions
- Program.cs             # Application entry point
- AudioDeviceSelector.cs # Main extension class
+ Commands/                               # Command implementations
+ Pages/                                  # UI pages
+   AudioDeviceSelectorPage.cs            # The page shown listing all audio devices  
+ Services/                               # Core service logic
+   AudioDeviceService.cs                 # Service wrapper around the COM api in Interop
+ Interop/                                # Windows Audio API interop definitions
+ Program.cs                              # Application entry point
+ AudioDeviceSelector.cs                  # Main plugin class
  AudioDeviceSelectorCommandsProvider.cs  # Command provider
 ```
 
-## Development
+# Development
 
 ## Prerequisites
 
@@ -79,10 +78,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-
-### Extension not loading
-- Verify the extension is properly deployted to command palette 
-
-## ?? Support
+## Support
 
 For issues and questions, please open an issue on the [GitHub repository](https://github.com/microsoft/CmdPal-AudioDeviceSelector/issues).

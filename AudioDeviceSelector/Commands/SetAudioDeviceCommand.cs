@@ -1,8 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation
-// The Microsoft Corporation licenses this file to you under the MIT license.
-// See the LICENSE file in the project root for more information.
-
-using CommandPallet.AudioDeviceSelector.Services;
+﻿using CommandPallet.AudioDeviceSelector.Services;
 using Microsoft.CommandPalette.Extensions;
 using Microsoft.CommandPalette.Extensions.Toolkit;
 using System;
@@ -12,18 +8,12 @@ using Windows.Foundation;
 
 namespace CommandPallet.AudioDeviceSelector.Commands;
 
-internal sealed class SetAudioDeviceCommand : IInvokableCommand
+internal sealed class SetAudioDeviceCommand(DeviceInformation device) : IInvokableCommand
 {
-    private readonly DeviceInformation _device;
-    private readonly IIconInfo _icon;
+    private readonly DeviceInformation _device = device;
+    private readonly IIconInfo _icon = AudioDeviceService.ExtractDeviceIcon(device);
 
     public event TypedEventHandler<object, IPropChangedEventArgs> PropChanged;
-
-    public SetAudioDeviceCommand(DeviceInformation device)
-    {
-        _device = device;
-        _icon = AudioDeviceService.ExtractDeviceIcon(device);
-    }
 
     public IIconInfo Icon => _icon;
 
@@ -39,7 +29,7 @@ internal sealed class SetAudioDeviceCommand : IInvokableCommand
         // Extract the Core Audio device ID from the device properties
         // The COM interface expects format: {0.0.0.00000000}.{guid}
         // But DeviceInformation.Id from winrt is in the form: \\?\SWD#MMDEVAPI#{0.0.0.00000000}.{guid}#{interface-guid}
-        string coreAudioDeviceId = AudioDeviceService.ExtractCoreAudioDeviceId(_device);
+        string? coreAudioDeviceId = AudioDeviceService.ExtractCoreAudioDeviceId(_device);
 
         if (string.IsNullOrEmpty(coreAudioDeviceId))
         {
@@ -49,7 +39,7 @@ internal sealed class SetAudioDeviceCommand : IInvokableCommand
 
         Debug.WriteLine($"Core Audio Device ID: {coreAudioDeviceId}");
 
-        bool success = AudioDeviceService.SetDefaultAudioDevice(coreAudioDeviceId);
+        bool success = AudioDeviceService.SetDefaultAudioDevice(coreAudioDeviceId!);
 
         if (!success)
         {

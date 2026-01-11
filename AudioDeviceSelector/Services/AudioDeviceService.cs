@@ -1,13 +1,11 @@
-﻿// Copyright (c) Microsoft Corporation
-// The Microsoft Corporation licenses this file to you under the MIT license.
-// See the LICENSE file in the project root for more information.
-
-using CommandPallet.AudioDeviceSelector.Interop;
+﻿using CommandPallet.AudioDeviceSelector.Interop;
 using Microsoft.CommandPalette.Extensions;
 using Microsoft.CommandPalette.Extensions.Toolkit;
 using System;
-using System.Diagnostics;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
+using Windows.Media.Devices;
 
 namespace CommandPallet.AudioDeviceSelector.Services;
 
@@ -19,54 +17,43 @@ internal class AudioDeviceService
         {
             if (string.IsNullOrEmpty(deviceId))
             {
-                Debug.WriteLine("Device ID is null or empty");
                 return false;
             }
 
             var policyConfig = new PolicyConfigClientWin7();
 
             // Set for all roles to ensure it becomes the system default
-            try
-            {
-                policyConfig.SetDefaultEndpoint(deviceId, ERole.eConsole);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Failed to set eConsole role: {ex.Message}");
-                throw;
-            }
-
-            try
-            {
-                policyConfig.SetDefaultEndpoint(deviceId, ERole.eMultimedia);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Failed to set eMultimedia role: {ex.Message}");
-                throw;
-            }
-
-            try
-            {
-                policyConfig.SetDefaultEndpoint(deviceId, ERole.eCommunications);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Failed to set eCommunications role: {ex.Message}");
-                throw;
-            }
+            policyConfig.SetDefaultEndpoint(deviceId, ERole.eConsole);
+            policyConfig.SetDefaultEndpoint(deviceId, ERole.eMultimedia);
+            policyConfig.SetDefaultEndpoint(deviceId, ERole.eCommunications);
 
             return true;
         }
-        catch (Exception ex)
+        catch
         {
-            Debug.WriteLine($"Failed to set default audio device: {ex.Message}");
             return false;
         }
     }
 
+    public static async Task<IReadOnlyList<DeviceInformation>> GetAudioOutputDevicesAsync()
+    {
+        string audioSelector = MediaDevice.GetAudioRenderSelector();
 
-    public static string ExtractCoreAudioDeviceId(DeviceInformation device)
+        // Request additional properties including FormFactor
+        var additionalProperties = new[]
+        {
+            PropertyKeys.FormatPropertyKey(PropertyKeys.PKEY_AudioEndpoint_FormFactor),
+            PropertyKeys.FormatPropertyKey(PropertyKeys.PKEY_Device_FriendlyName),
+            PropertyKeys.FormatPropertyKey(PropertyKeys.PKEY_ItemNameDisplay),
+            "System.Devices.DeviceInstanceId"
+        };
+
+        var devices = await DeviceInformation.FindAllAsync(audioSelector, additionalProperties);
+        return devices;
+    }
+
+
+    public static string? ExtractCoreAudioDeviceId(DeviceInformation device)
     {
         // Try to get the device instance ID which contains the Core Audio endpoint ID
         if (device.Properties.TryGetValue("System.Devices.DeviceInstanceId", out object instanceIdObj)
