@@ -5,7 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CommandPallet.AudioDeviceSelector;
+namespace CommandPalette.AudioDeviceSelector;
 
 public class Program
 {

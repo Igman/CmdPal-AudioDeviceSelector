@@ -1,60 +1,60 @@
 using System;
 
-namespace CommandPallet.AudioDeviceSelector.Interop;
+namespace CommandPalette.AudioDeviceSelector.Interop;
 
 internal static class PropertyKeys
 {
     public static readonly PROPERTYKEY PKEY_ItemNameDisplay = new PROPERTYKEY
     {
-        fmtid = new Guid("{B725F130-47EF-101A-A5F1-02608C9EEBAC}"),
+        fmtid = new Guid("b725f130-47ef-101a-a5f1-02608c9eebac"),
         pid = new UIntPtr(10)
     };
 
     public static readonly PROPERTYKEY PKEY_AppUserModel_Background = new PROPERTYKEY
     {
-        fmtid = Guid.Parse("{86D40B4D-9069-443C-819A-2A54090DCCEC}"),
+        fmtid = new Guid("86d40b4d-9069-443c-819a-2a54090dccec"),
         pid = new UIntPtr(4)
     };
 
     public static readonly PROPERTYKEY PKEY_AppUserModel_PackageInstallPath = new PROPERTYKEY
     {
-        fmtid = Guid.Parse("{9F4C2855-9F79-4B39-A8D0-E1D42DE1D5F3}"),
+        fmtid = new Guid("9f4c2855-9f79-4b39-a8d0-e1d42de1d5f3"),
         pid = new UIntPtr(15)
     };
 
     public static readonly PROPERTYKEY PKEY_Tile_SmallLogoPath = new PROPERTYKEY
     {
-        fmtid = Guid.Parse("{86D40B4D-9069-443C-819A-2A54090DCCEC}"),
+        fmtid = new Guid("86d40b4d-9069-443c-819a-2a54090dccec"),
         pid = new UIntPtr(2)
     };
 
     public static readonly PROPERTYKEY PKEY_AppUserModel_PackageFullName = new PROPERTYKEY
     {
-        fmtid = Guid.Parse("{9F4C2855-9F79-4B39-A8D0-E1D42DE1D5F3}"),
+        fmtid = new Guid("9f4c2855-9f79-4b39-a8d0-e1d42de1d5f3"),
         pid = new UIntPtr(21)
     };
 
     public static readonly PROPERTYKEY PKEY_Device_FriendlyName = new PROPERTYKEY
     {
-        fmtid = Guid.Parse("{a45c254e-df1c-4efd-8020-67d146a850e0}"),
+        fmtid = new Guid("a45c254e-df1c-4efd-8020-67d146a850e0"),
         pid = new UIntPtr(14)
     };
 
     public static readonly PROPERTYKEY PKEY_AudioEndPoint_Interface = new PROPERTYKEY
     {
-        fmtid = Guid.Parse("{a45c254e-df1c-4efd-8020-67d146a850e0}"),
+        fmtid = new Guid("a45c254e-df1c-4efd-8020-67d146a850e0"),
         pid = new UIntPtr(2)
     };
 
     public static readonly PROPERTYKEY PKEY_AudioEndpoint_PhysicalSpeakers = new PROPERTYKEY
     {
-        fmtid = Guid.Parse("{1da5d803-d492-4edd-8c23-e0c0ffee7f0e}"),
+        fmtid = new Guid("1da5d803-d492-4edd-8c23-e0c0ffee7f0e"),
         pid = new UIntPtr(3)
     };
 
     public static readonly PROPERTYKEY PKEY_AudioEndpoint_FormFactor = new PROPERTYKEY
     {
-        fmtid = Guid.Parse("{1da5d803-d492-4edd-8c23-e0c0ffee7f0e}"),
+        fmtid = new Guid("1da5d803-d492-4edd-8c23-e0c0ffee7f0e"),
         pid = new UIntPtr(0)
     };
 

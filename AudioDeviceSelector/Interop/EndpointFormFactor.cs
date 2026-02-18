@@ -1,4 +1,4 @@
-namespace CommandPallet.AudioDeviceSelector.Interop;
+namespace CommandPalette.AudioDeviceSelector.Interop;
 
 /// <summary>
 /// Represents the form factor of an audio endpoint device.

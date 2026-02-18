@@ -1,4 +1,4 @@
-﻿using CommandPallet.AudioDeviceSelector.Services;
+using CommandPalette.AudioDeviceSelector.Services;
 using Microsoft.CommandPalette.Extensions;
 using Microsoft.CommandPalette.Extensions.Toolkit;
 using System;
@@ -6,7 +6,7 @@ using System.Diagnostics;
 using Windows.Devices.Enumeration;
 using Windows.Foundation;
 
-namespace CommandPallet.AudioDeviceSelector.Commands;
+namespace CommandPalette.AudioDeviceSelector.Commands;
 
 internal sealed class SetAudioDeviceCommand(DeviceInformation device) : IInvokableCommand
 {
@@ -26,25 +26,30 @@ internal sealed class SetAudioDeviceCommand(DeviceInformation device) : IInvokab
         Debug.WriteLine($"Setting default audio device to: {_device.Name}");
         Debug.WriteLine($"Device ID: {_device.Id}");
 
-        // Extract the Core Audio device ID from the device properties
-        // The COM interface expects format: {0.0.0.00000000}.{guid}
-        // But DeviceInformation.Id from winrt is in the form: \\?\SWD#MMDEVAPI#{0.0.0.00000000}.{guid}#{interface-guid}
         string? coreAudioDeviceId = AudioDeviceService.ExtractCoreAudioDeviceId(_device);
 
         if (string.IsNullOrEmpty(coreAudioDeviceId))
         {
             Debug.WriteLine($"Failed to extract Core Audio device ID for: {_device.Name}");
-            return CommandResult.KeepOpen();
+            return CommandResult.ShowToast(new ToastArgs
+            {
+                Message = $"Could not identify audio device: {_device.Name}",
+                Result = CommandResult.KeepOpen(),
+            });
         }
 
         Debug.WriteLine($"Core Audio Device ID: {coreAudioDeviceId}");
 
-        bool success = AudioDeviceService.SetDefaultAudioDevice(coreAudioDeviceId!);
+        bool success = AudioDeviceService.SetDefaultAudioDevice(coreAudioDeviceId);
 
         if (!success)
         {
-            Debug.WriteLine($"Failed to set audio device: {_device.Name}");
-            return CommandResult.KeepOpen();
+            Debug.WriteLine($"Failed to switch to {_device.Name}");
+            return CommandResult.ShowToast(new ToastArgs
+            {
+                Message = $"Failed to switch to {_device.Name}",
+                Result = CommandResult.KeepOpen(),
+            });
         }
 
         return CommandResult.Hide();

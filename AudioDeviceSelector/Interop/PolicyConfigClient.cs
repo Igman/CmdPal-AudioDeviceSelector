@@ -1,10 +1,10 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace CommandPallet.AudioDeviceSelector.Interop;
+namespace CommandPalette.AudioDeviceSelector.Interop;
 
 [ComImport]
-[Guid("870AF99C-171D-4F9E-AF0D-E63DF40C2BC9")]
+[Guid("870af99c-171d-4f9e-af0d-e63df40c2bc9")]
 internal class PolicyConfigClient { }
 
 internal class PolicyConfigClientWin7

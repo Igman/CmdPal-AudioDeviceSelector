@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace CommandPallet.AudioDeviceSelector.Interop;
+namespace CommandPalette.AudioDeviceSelector.Interop;
 
 [StructLayout(LayoutKind.Explicit, Pack = 1)]
 internal struct PropVariant

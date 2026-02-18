@@ -1,7 +1,7 @@
-﻿using Microsoft.CommandPalette.Extensions;
+using Microsoft.CommandPalette.Extensions;
 using Microsoft.CommandPalette.Extensions.Toolkit;
 
-namespace CommandPallet.AudioDeviceSelector;
+namespace CommandPalette.AudioDeviceSelector;
 
 public partial class AudioDeviceSelectorCommandsProvider : CommandProvider
 {

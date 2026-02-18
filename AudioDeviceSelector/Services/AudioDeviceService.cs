@@ -1,4 +1,4 @@
-﻿using CommandPallet.AudioDeviceSelector.Interop;
+using CommandPalette.AudioDeviceSelector.Interop;
 using Microsoft.CommandPalette.Extensions;
 using Microsoft.CommandPalette.Extensions.Toolkit;
 using System;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
 using Windows.Media.Devices;
 
-namespace CommandPallet.AudioDeviceSelector.Services;
+namespace CommandPalette.AudioDeviceSelector.Services;
 
 internal class AudioDeviceService
 {

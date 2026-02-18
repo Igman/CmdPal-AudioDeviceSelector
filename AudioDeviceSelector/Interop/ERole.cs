@@ -1,4 +1,4 @@
-namespace CommandPallet.AudioDeviceSelector.Interop;
+namespace CommandPalette.AudioDeviceSelector.Interop;
 
 internal enum ERole
 {

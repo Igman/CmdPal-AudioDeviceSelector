@@ -1,19 +1,17 @@
-﻿using Microsoft.CommandPalette.Extensions;
+using Microsoft.CommandPalette.Extensions;
 using Microsoft.CommandPalette.Extensions.Toolkit;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Windows.Devices.Enumeration;
-using CommandPallet.AudioDeviceSelector.Commands;
-using CommandPallet.AudioDeviceSelector.Services;
+using CommandPalette.AudioDeviceSelector.Commands;
+using CommandPalette.AudioDeviceSelector.Services;
 
-namespace CommandPallet.AudioDeviceSelector;
+namespace CommandPalette.AudioDeviceSelector;
 
 internal sealed partial class AudioDeviceSelectorPage : ListPage
 {
-    private IReadOnlyList<DeviceInformation>? _audioOutputDevices;
-
     public AudioDeviceSelectorPage()
     {
         Icon = new IconInfo("🔊");
@@ -23,11 +21,11 @@ internal sealed partial class AudioDeviceSelectorPage : ListPage
 
     public override IListItem[] GetItems()
     {
-        _audioOutputDevices ??= AudioDeviceService.GetAudioOutputDevicesAsync().GetAwaiter().GetResult();
+        IReadOnlyList<DeviceInformation> audioOutputDevices = AudioDeviceService.GetAudioOutputDevicesAsync().GetAwaiter().GetResult();
 
-        return _audioOutputDevices.Count == 0
+        return audioOutputDevices.Count == 0
             ? [new ListItem(new Microsoft.CommandPalette.Extensions.Toolkit.NoOpCommand()) { Title = "No audio output devices found." }]
-            : _audioOutputDevices.Select(CreateListItemForDevice).ToArray();
+            : audioOutputDevices.Select(CreateListItemForDevice).ToArray();
     }
 
     private static IListItem CreateListItemForDevice(DeviceInformation device)

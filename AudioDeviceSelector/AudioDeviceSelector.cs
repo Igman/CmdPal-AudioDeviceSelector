@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using Microsoft.CommandPalette.Extensions;
 
-namespace CommandPallet.AudioDeviceSelector;
+namespace CommandPalette.AudioDeviceSelector;
 
 [Guid("283bba47-1724-437f-ba64-ff6240e235dc")]
 public sealed partial class AudioDeviceSelector : IExtension, IDisposable
