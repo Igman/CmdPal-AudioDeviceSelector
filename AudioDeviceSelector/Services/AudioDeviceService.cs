@@ -9,8 +9,10 @@ using Windows.Media.Devices;
 
 namespace CommandPalette.AudioDeviceSelector.Services;
 
-internal class AudioDeviceService
+internal static class AudioDeviceService
 {
+    private static readonly PolicyConfigClientWin7 _policyConfig = new();
+
     public static bool SetDefaultAudioDevice(string deviceId)
     {
         try
@@ -20,12 +22,10 @@ internal class AudioDeviceService
                 return false;
             }
 
-            var policyConfig = new PolicyConfigClientWin7();
-
             // Set for all roles to ensure it becomes the system default
-            policyConfig.SetDefaultEndpoint(deviceId, ERole.eConsole);
-            policyConfig.SetDefaultEndpoint(deviceId, ERole.eMultimedia);
-            policyConfig.SetDefaultEndpoint(deviceId, ERole.eCommunications);
+            _policyConfig.SetDefaultEndpoint(deviceId, ERole.eConsole);
+            _policyConfig.SetDefaultEndpoint(deviceId, ERole.eMultimedia);
+            _policyConfig.SetDefaultEndpoint(deviceId, ERole.eCommunications);
 
             return true;
         }
