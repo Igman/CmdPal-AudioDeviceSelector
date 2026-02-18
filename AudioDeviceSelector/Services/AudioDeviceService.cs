@@ -3,6 +3,7 @@ using Microsoft.CommandPalette.Extensions;
 using Microsoft.CommandPalette.Extensions.Toolkit;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
 using Windows.Media.Devices;
@@ -29,8 +30,9 @@ internal static class AudioDeviceService
 
             return true;
         }
-        catch
+        catch (Exception ex)
         {
+            Debug.WriteLine($"Failed to set default audio device '{deviceId}': {ex.Message}");
             return false;
         }
     }

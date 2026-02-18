@@ -13,7 +13,9 @@ internal sealed class SetAudioDeviceCommand(DeviceInformation device) : IInvokab
     private readonly DeviceInformation _device = device;
     private readonly IIconInfo _icon = AudioDeviceService.ExtractDeviceIcon(device);
 
+#pragma warning disable CS0067 // Required by IInvokableCommand; raised by the framework
     public event TypedEventHandler<object, IPropChangedEventArgs> PropChanged;
+#pragma warning restore CS0067
 
     public IIconInfo Icon => _icon;
 
