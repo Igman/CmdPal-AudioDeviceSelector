@@ -1,28 +1,23 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CommandPallet.AudioDeviceSelector.Interop
+namespace CommandPallet.AudioDeviceSelector.Interop;
+
+[ComImport]
+[Guid("870AF99C-171D-4F9E-AF0D-E63DF40C2BC9")]
+internal class PolicyConfigClient { }
+
+internal class PolicyConfigClientWin7
 {
-    [ComImport]
-    [Guid("870AF99C-171D-4F9E-AF0D-E63DF40C2BC9")]
-    public class PolicyConfigClient { }
+    private readonly IPolicyConfigWin7 _policyClient = (IPolicyConfigWin7)new PolicyConfigClient();
 
-    public class PolicyConfigClientWin7
+    public void SetEndpointVisibility(string deviceId, bool isVisible)
     {
-        IPolicyConfigWin7 _policyClient = (IPolicyConfigWin7)new PolicyConfigClient();
+        _policyClient.SetEndpointVisibility(deviceId, isVisible ? (short)1 : (short)0);
+    }
 
-        public void SetEndpointVisibility(string deviceId, bool isVisible)
-        {
-            _policyClient.SetEndpointVisibility(deviceId, isVisible ? (short)1 : (short)0);
-        }
-
-        public void SetDefaultEndpoint(string deviceId, ERole role = ERole.eMultimedia)
-        {
-            _policyClient.SetDefaultEndpoint(deviceId, role);
-        }
+    public void SetDefaultEndpoint(string deviceId, ERole role = ERole.eMultimedia)
+    {
+        _policyClient.SetDefaultEndpoint(deviceId, role);
     }
 }

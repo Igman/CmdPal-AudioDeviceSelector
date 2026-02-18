@@ -27,10 +27,10 @@ A Command Palette extension for Windows that allows you to quickly switch betwee
    - Right-click the solution and select **Build Solution** (or press `Ctrl+Shift+B`)
    - The build output should show a successful compilation
 
-4. Deploy the solution to command pallette:
-   - Right-click the project and select **Depoloy**
+4. Deploy the solution to Command Palette:
+   - Right-click the project and select **Deploy**
 
-4. In command pallet reload the extensions via teh reload command
+5. In Command Palette reload the extensions via the reload command
 
 ## Usage
 

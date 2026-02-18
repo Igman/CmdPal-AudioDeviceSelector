@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+namespace CommandPallet.AudioDeviceSelector.Interop;
 
-namespace CommandPallet.AudioDeviceSelector.Interop
+internal enum ERole
 {
-    public enum ERole
-    {
-        eConsole = 0,
-        eMultimedia = 1,
-        eCommunications = 2,
-        ERole_enum_count = 3
-    }
+    eConsole = 0,
+    eMultimedia = 1,
+    eCommunications = 2,
 }

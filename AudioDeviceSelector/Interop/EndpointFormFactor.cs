@@ -15,6 +15,6 @@ internal enum EndpointFormFactor
     Handset = 6,
     UnknownDigitalPassthrough = 7,
     SPDIF = 8,
-  DigitalAudioDisplayDevice = 9,
-  UnknownFormFactor = 10
+    DigitalAudioDisplayDevice = 9,
+    UnknownFormFactor = 10
 }
