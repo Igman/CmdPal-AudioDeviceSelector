@@ -16,7 +16,7 @@ public class Program
         {
             global::Shmuelie.WinRTServer.ComServer server = new();
 
-            ManualResetEvent extensionDisposedEvent = new(false);
+            using ManualResetEvent extensionDisposedEvent = new(false);
             
             // We are instantiating an extension instance once above, and returning it every time the callback in RegisterExtension below is called.
             // This makes sure that only one instance of AudioDeviceSelector is alive, which is returned every time the host asks for the IExtension object.

@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace CommandPalette.AudioDeviceSelector.Interop;
 
-[StructLayout(LayoutKind.Explicit, Pack = 1)]
+[StructLayout(LayoutKind.Explicit, Pack = 0)]
 internal struct PropVariant
 {
     [FieldOffset(0)] public VarEnum varType;

@@ -1,18 +1,21 @@
-using Microsoft.CommandPalette.Extensions;
-using Microsoft.CommandPalette.Extensions.Toolkit;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Windows.Devices.Enumeration;
 using CommandPalette.AudioDeviceSelector.Commands;
 using CommandPalette.AudioDeviceSelector.Services;
+using Microsoft.CommandPalette.Extensions;
+using Microsoft.CommandPalette.Extensions.Toolkit;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Windows.Devices.Enumeration;
 
 namespace CommandPalette.AudioDeviceSelector;
 
 internal sealed partial class AudioDeviceSelectorPage : ListPage
 {
     private IReadOnlyList<DeviceInformation> _audioOutputDevices = [];
-    private bool _isRefreshing;
+    private int _isRefreshing; // 0 = false, 1 = true; accessed atomically via Interlocked
 
     public AudioDeviceSelectorPage()
     {
@@ -24,9 +27,8 @@ internal sealed partial class AudioDeviceSelectorPage : ListPage
 
     public override IListItem[] GetItems()
     {
-        if (!_isRefreshing)
+        if (Interlocked.CompareExchange(ref _isRefreshing, 1, 0) == 0)
         {
-            _isRefreshing = true;
             _ = RefreshDevicesAsync();
         }
 
@@ -37,14 +39,24 @@ internal sealed partial class AudioDeviceSelectorPage : ListPage
 
     private async Task RefreshDevicesAsync()
     {
-        var fresh = await AudioDeviceService.GetAudioOutputDevicesAsync().ConfigureAwait(false);
-        _isRefreshing = false;
-        IsLoading = false;
-
-        if (!DevicesEqual(fresh, _audioOutputDevices))
+        try
         {
-            _audioOutputDevices = fresh;
-            RaiseItemsChanged(_audioOutputDevices.Count);
+            var fresh = await AudioDeviceService.GetAudioOutputDevicesAsync().ConfigureAwait(false);
+
+            if (!DevicesEqual(fresh, _audioOutputDevices))
+            {
+                _audioOutputDevices = fresh;
+                RaiseItemsChanged(_audioOutputDevices.Count);
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Failed to refresh audio devices: {ex}");
+        }
+        finally
+        {
+            Interlocked.Exchange(ref _isRefreshing, 0);
+            IsLoading = false;
         }
     }
 

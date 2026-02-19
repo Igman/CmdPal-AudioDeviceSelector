@@ -7,5 +7,5 @@ namespace CommandPalette.AudioDeviceSelector.Interop;
 internal struct PROPERTYKEY
 {
     public Guid fmtid;
-    public System.UIntPtr pid;
+    public UInt32 pid; // Maps to DWORD
 }

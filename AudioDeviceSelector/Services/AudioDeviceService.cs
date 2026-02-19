@@ -24,9 +24,9 @@ internal static class AudioDeviceService
             }
 
             // Set for all roles to ensure it becomes the system default
-            _policyConfig.SetDefaultEndpoint(deviceId, ERole.eConsole);
-            _policyConfig.SetDefaultEndpoint(deviceId, ERole.eMultimedia);
-            _policyConfig.SetDefaultEndpoint(deviceId, ERole.eCommunications);
+            _policyConfig.SetDefaultEndpoint(deviceId, Role.Console);
+            _policyConfig.SetDefaultEndpoint(deviceId, Role.Multimedia);
+            _policyConfig.SetDefaultEndpoint(deviceId, Role.Communications);
 
             return true;
         }
