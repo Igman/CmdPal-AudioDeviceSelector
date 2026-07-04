@@ -1,0 +1,29 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Windows 11 Style Background with Purple Gradient -->
+  <defs>
+    <linearGradient id="purpleGradient" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#C08BFF"/> <!-- Fluent Light Purple -->
+      <stop offset="100%" stop-color="#6B3CC9"/> <!-- Windows Purple -->
+    </linearGradient>
+    <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Main Container -->
+  <rect x="32" y="32" width="448" height="448" rx="56" fill="url(#purpleGradient)"/>
+
+  <!-- Speaker Icon (Top-Left) -->
+  <g transform="translate(60, 60) scale(0.50)">
+    <path d="M20 150 L120 150 L230 60 L230 452 L120 362 L20 362 Z" fill="white" fill-opacity="0.95"/>
+    <path d="M290 180 C320 220 320 292 290 332" stroke="white" stroke-width="32" stroke-linecap="round" fill="none" opacity="0.9"/>
+    <path d="M350 130 C410 190 410 322 350 382" stroke="white" stroke-width="32" stroke-linecap="round" fill="none" opacity="0.7"/>
+  </g>
+
+  <!-- Headphones Icon (Bottom-Right) -->
+  <g transform="translate(255, 255) scale(0.50)">
+       <path d="M50 150 V100 C50 44.77 94.77 0 150 0 C205.23 0 250 44.77 250 100 V150" stroke="white" stroke-width="32" stroke-linecap="round" fill="none"/>
+       <rect x="10" y="140" width="80" height="120" rx="24" fill="white"/>
+       <rect x="210" y="140" width="80" height="120" rx="24" fill="white"/>
+  </g>
+</svg>
