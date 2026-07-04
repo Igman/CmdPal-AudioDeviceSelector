@@ -76,8 +76,8 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt) file for details.
 
 ## Support
 
-For issues and questions, please open an issue on the [GitHub repository](https://github.com/microsoft/CmdPal-AudioDeviceSelector/issues).
+For issues and questions, please open an issue on the [GitHub repository](https://github.com/Igman/CmdPal-AudioDeviceSelector/issues).
